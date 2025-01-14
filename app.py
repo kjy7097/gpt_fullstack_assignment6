@@ -10,6 +10,9 @@ from langchain.vectorstores import FAISS
 from langchain.schema.runnable import RunnablePassthrough, RunnableLambda
 from langchain.memory import ConversationBufferMemory
 
+import os
+
+os.environ['OPENAI_API_KEY'] = 'dummy_key'
 
 class ChatCallbackHandler(BaseCallbackHandler):
     message = ""
