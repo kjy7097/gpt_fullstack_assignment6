@@ -29,6 +29,7 @@ st.set_page_config(page_title="Story GPT", page_icon="📖")
 st.title("Welcome! Story GPT")
 
 with st.sidebar:
+    st.page_link(page="https://github.com/kjy7097/gpt_fullstack_assignment6.git",label="Github Repo.")
     api_key = st.text_input("Enter OpenAI API Key....")
     if api_key:
         file = st.file_uploader(
