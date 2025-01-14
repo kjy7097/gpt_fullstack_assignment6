@@ -12,7 +12,7 @@ from langchain.memory import ConversationBufferMemory
 
 import os
 
-os.environ['OPENAI_API_KEY'] = 'dummy_key'
+os.environ['OPENAI_API_KEY'] = 'dummy_api_key'
 
 class ChatCallbackHandler(BaseCallbackHandler):
     message = ""
@@ -46,6 +46,13 @@ if api_key:
 
                 Ask me any question about the book."""
     )
+    os.environ['OPENAI_API_KEY'] = api_key
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0.1,
+        streaming=True,
+        callbacks=[ChatCallbackHandler()],
+    )
 else:
     st.markdown(
         """
@@ -53,13 +60,7 @@ else:
         """
     )
 
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0.1,
-    streaming=True,
-    callbacks=[ChatCallbackHandler()],
-    api_key=api_key,
-)
+
 
 if not "history" in st.session_state:
     st.session_state["history"] = []
